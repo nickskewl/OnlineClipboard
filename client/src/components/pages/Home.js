@@ -35,7 +35,9 @@ const Home = (props) => {
             <li>
               Append any string at the end in URL{" "}
               <span className="text-primary">{window.location.origin}</span>.{" "}
-              <b>Example:</b> {window.location.origin}/test
+              <div>
+                <b>Example:</b> {window.location.origin}/test
+              </div>
             </li>
             <li>Create any content you want.</li>
             <li>Use the same URL on another device to access your content.</li>

@@ -162,12 +162,12 @@ const User = ({ match }) => {
   }
 
   return (
-    <Fragment>
+    <div style={{ overflowX: "auto" }}>
       <h1>
         Hello <span className="text-primary">{match.params.name}</span>
       </h1>
       {contentCreated ? <Created /> : <Fragment>{data}</Fragment>}
-    </Fragment>
+    </div>
   );
 };
 

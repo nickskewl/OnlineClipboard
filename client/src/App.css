@@ -102,8 +102,9 @@ img {
 /* Cards */
 .card {
   padding: 1rem;
-  border: rgb(29, 12, 12) 1.2px dotted;
+  border: rgb(29, 12, 12) 1.2px ridge;
   margin: 0.7rem 0;
+  overflow-x: auto;
 }
 
 /* List */
