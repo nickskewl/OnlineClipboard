@@ -1,5 +1,6 @@
 const express = require("express");
 const Clip = require("../models/Clip");
+const ClipHistory = require("../models/ClipHistory");
 
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
@@ -27,7 +28,7 @@ router.get("/:id", async (req, res) => {
     res.send(clipData);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Server error occured!!" });
+    res.status(500).json({ msg: "Server error occured!! ", error: err });
   }
 });
 
@@ -48,13 +49,13 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { content, expiresAfter, createdAt } = req.body;
+    const { content, expiresAfter } = req.body;
     const id = req.params.id;
 
     const clipData = {};
     clipData.content = content;
-    clipData.createdAt = new Date();
     clipData.expiresAfter = expiresAfter;
+    clipData.createdAt = new Date();
 
     var created = new Date();
     if (expiresAfter !== 0) {
@@ -74,11 +75,22 @@ router.put(
       );
       // await clipData.save();
 
+      //Saving record of clips created
+      try {
+        const clipHistory = new ClipHistory({
+          id,
+          content,
+          createdAt: clipData.createdAt,
+        });
+        await clipHistory.save();
+      } catch (err1) {
+        console.log("Error in clip history: " + err);
+      }
+
       return res.json({ msg: "Clip created" });
     } catch (err) {
       console.log("Error: " + err);
-      console.error("Err msg:" + err.message);
-      res.status(500).json({ msg: "Server error occured!!" });
+      res.status(500).json({ msg: "Server error occured!! ", error: err });
     }
   }
 );
