@@ -433,7 +433,12 @@ table th {
   }
 
   .lead {
-    font-size: 1rem;
+    font-size: 1.3rem;
+  }
+
+  .medium {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
   }
 
   /* Navbar */

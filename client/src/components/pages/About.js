@@ -14,6 +14,10 @@ const About = () => {
         </div>
         <div>
           <strong>By - Nitesh Mittal </strong>
+          <p>
+            <i className="fas fa-envelope"></i>{" "}
+            <a href="mailto:someone@example.com">niteshmit89@gmail.com</a>
+          </p>
         </div>
       </div>
     </div>

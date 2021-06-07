@@ -33,7 +33,7 @@ const Home = (props) => {
           <h3 className="text-left">Instructions:</h3>
           <ul style={{ listStyle: "square", marginLeft: "15px" }}>
             <li>
-              Append any string at the end in URL{" "}
+              Append any text at the end of URL{" "}
               <span className="text-primary">{window.location.origin}</span>.{" "}
               <div>
                 <b>Example:</b> {window.location.origin}/test
