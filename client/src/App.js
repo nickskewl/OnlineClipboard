@@ -23,7 +23,7 @@ const App = () => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/:name" component={User} />
-                <Route exact path="/error" component={Error} />
+                <Route component={Error} />
               </Switch>
             </div>
           </Fragment>
