@@ -105,7 +105,7 @@ const User = ({ match }) => {
           </button>
           <select
             id="dropdown"
-            style={{ width: "auto", display: "inline-block" }}
+            style={{ width: "100%", display: "inline-block" }}
             onChange={onChangeDropDown}
             value={expiresAfter}
           >
@@ -162,7 +162,7 @@ const User = ({ match }) => {
   }
 
   return (
-    <div style={{ overflowX: "auto" }}>
+    <div style={{ overflowX: "auto", overflowWrap: "break-word" }}>
       <h1>
         Hello <span className="text-primary">{match.params.name}</span>
       </h1>

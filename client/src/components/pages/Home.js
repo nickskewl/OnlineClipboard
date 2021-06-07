@@ -47,7 +47,9 @@ const Home = (props) => {
           <form onSubmit={onSubmit}>
             <div>
               <div>
-                <label className="lead text-primary">Try it once!!</label>
+                <label className="lead text-primary">
+                  <strong>Try it once!!</strong>
+                </label>
               </div>
               <div style={{ marginTop: "15px" }}>
                 <label className="medium">Navigate to</label>
@@ -63,8 +65,8 @@ const Home = (props) => {
                 onChange={onChange}
                 required
                 style={{
-                  display: "inline-block",
-                  width: "auto",
+                  // display: "inline-block",
+                  // width: "auto",
                   margin: "3px 0px",
                 }}
               />
