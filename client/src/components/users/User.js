@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import UserContext from "../../context/user/userContext";
 import AlertContext from "../../context/alert/alertContext";
-import Created from "../layout/Created";
+import Created from "../pages/Created";
 import Spinner from "../layout/Spinner";
 
 const User = ({ match }) => {
@@ -52,41 +52,36 @@ const User = ({ match }) => {
     isEmpty = false;
   }
 
-  const onClickCopy = () => {
-    // navigator.clipboard.writeText(userContent);
-    document.getElementById("ta_content").select();
-    document.execCommand("copy");
-  };
-
-  const onClickCreate = () => {
-    const identifier = match.params.name;
-    if (newContent === "") {
-      alertContext.setAlert("Please add some content", "danger");
-    } else {
-      createUserContent(identifier, newContent, expiresAfter);
+  const onClick = (e) => {
+    console.log(e.target.id);
+    if (e.target.id === "create") {
+      const identifier = match.params.name;
+      if (newContent === "") {
+        alertContext.setAlert("Please add some content", "danger");
+      } else {
+        createUserContent(identifier, newContent, expiresAfter);
+      }
+      // history.push(`/user/${identifier}`);
+    } else if (e.target.id === "copy") {
+      // navigator.clipboard.writeText(userContent);
+      document.getElementById("ta_content").select();
+      document.execCommand("copy");
     }
-
-    // history.push(`/user/${identifier}`);
   };
 
   const onChange = (e) => {
-    setNewContent(e.target.value);
-  };
-
-  const onChangeDropDown = (e) => {
-    setExpiresAfter(e.target.value);
+    const id = e.target.id;
+    const value = e.target.value;
+    if (id === "ta_content") {
+      setNewContent(value);
+    } else if (id === "destroy_dropdown") {
+      setExpiresAfter(value);
+    }
   };
 
   const formatExpireDate = () => {
     var currentDate = new Date();
     var formatedExpireDate = new Date(expiresAt);
-    // const month = formatedExpireDate.getMonth() + 1;
-    // const day = formatedExpireDate.getDate();
-    // const year = formatedExpireDate.getFullYear();
-    // const hour = formatedExpireDate.getHours();
-    // const min = formatedExpireDate.getMinutes();
-    // const sec = formatedExpireDate.getSeconds();
-    // return month + "/" + day + "/" + year + "-" + hour + ":" + min + ":" + sec;
     return Math.round((formatedExpireDate - currentDate) / 1000);
   };
 
@@ -97,16 +92,17 @@ const User = ({ match }) => {
       <Fragment>
         <div>
           <button
+            id="create"
             className="btn btn-dark btn-sm"
             style={{ display: "inline-block" }}
-            onClick={onClickCreate}
+            onClick={onClick}
           >
             Create
           </button>
           <select
-            id="dropdown"
+            id="destroy_dropdown"
             style={{ width: "100%", display: "inline-block" }}
-            onChange={onChangeDropDown}
+            onChange={onChange}
             value={expiresAfter}
           >
             <option value="0">Destroy content when viewed</option>
@@ -135,9 +131,10 @@ const User = ({ match }) => {
         </div>
         <div>
           <button
+            id="copy"
             style={{ marginRight: "5px" }}
             className="btn btn-dark btn-sm"
-            onClick={onClickCopy}
+            onClick={onClick}
           >
             Copy
           </button>

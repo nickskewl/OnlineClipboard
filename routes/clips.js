@@ -79,7 +79,6 @@ router.put(
       try {
         const clipHistory = new ClipHistory({
           id,
-          content,
           createdAt: clipData.createdAt,
         });
         await clipHistory.save();
